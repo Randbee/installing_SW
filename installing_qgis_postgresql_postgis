@@ -1,0 +1,60 @@
+     ####installing qgis#####
+
+#adding the repo for qgis 
+ sudo add-apt-repository "deb http://qgis.org/ubuntugis trusty main"
+ sudo add-apt-repository "deb http://ppa.launchpad.net/ubuntugis/ubuntugis-unstable/ubuntu trusty main"
+#adding the key 
+wget -O - http://qgis.org/downloads/qgis-2016.gpg.key | gpg --import
+gpg --fingerprint 073D307A618E5811
+#Should output:
+#pub   2048R/618E5811 2016-08-17 [expires: 2017-08-17]
+#      Key fingerprint = 942D 6AD5 DF3E 75DE A9AF  72B2 073D 307A 618E 5811
+#uid                  QGIS Archive Automatic Signing Key (2016) <qgis-developer@lists.osgeo.org>
+#sub   2048R/D34A963D 2016-08-17
+#After you have verified the fingerprint you can add the key to apt with:
+gpg --export --armor 073D307A618E5811 | sudo apt-key add -
+#importing keys with Y-PPA-Manager for the ppa.launchpad.net/ubuntugis-unstable/ubuntu 
+sudo add-apt-repository ppa:webupd8team/y-ppa-manager
+sudo apt-get update
+sudo apt-get install y-ppa-manager
+#type:
+y-ppa-manager
+
+#When the main y-ppa-manager window appears, click on "Advanced."
+#From the list of advanced tasks, select "Try to import all missing GPG keys" and click OK
+#installing qgis
+ sudo apt-get update 
+ sudo apt-get install qgis python-qgis qgis-plugin-grass
+
+     #### installingpostgresql-9.3-postgis-2.2 
+#from repo https://launchpad.net/~ubuntugis/+archive/ubuntu/ubuntugis-unstable
+##uncomment all the repo on the file source.list
+deb http://qgis.org/ubuntugis trusty main
+deb http://ppa.launchpad.net/ubuntugis/ubuntugis-unstable/ubuntu trusty main
+#adding the repo from launchpad
+sudo add-apt-repository ppa:ubuntugis/ubuntugis-unstable
+
+#or manually, coping and pasting the following lines to the file sources.list
+deb http://ppa.launchpad.net/ubuntugis/ubuntugis-unstable/ubuntu trusty main 
+deb-src http://ppa.launchpad.net/ubuntugis/ubuntugis-unstable/ubuntu trusty main 
+ 
+sudo apt-get update
+##signing the key
+#Signing key:
+#    1024R/314DF160 (What is this?) 
+#Fingerprint:
+#    6B827C12C2D425E227EDCA75089EBE08314DF160 
+
+sudo apt-get update
+sudo apt-get install postgresql-9.3-postgis-2.2
+
+#####installing pgadmin3 on Ubuntu###### 
+
+#importing the repo on 
+sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
+#importing the key, update the package list and install pgadmin3
+sudo apt-get install wget ca-certificates
+wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt-get install pgadmin3

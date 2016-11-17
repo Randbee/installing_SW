@@ -1,0 +1,19 @@
+#creating a server
+
+pgAdmin uses PostgrSQL's 'pgpass' mechanism to store passwords 
+on linux
+~/.pgpass
+#Modify password for role postgres:
+sudo -u postgres psql postgres
+alter user postgres with password 'admin';
+
+#Now connect to pgadmin using username postgres and password postgres
+
+#Now you can create roles & databases using pgAdmin
+
+#After that create a server connection
+#just follow the instraction there
+
+https://www.pgadmin.org/docs/dev/connect.html
+
+
