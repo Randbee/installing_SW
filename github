@@ -1,0 +1,7 @@
+#download GitHub
+sudo apt-get install git 
+#cloning the repository
+git clone https://github.com/Randbee/installing_SW.git
+#to configuring your account for your credential
+git config --global user.email "you@example.com"
+git config --global user.name "Your Name"
