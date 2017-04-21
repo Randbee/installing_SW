@@ -1,0 +1,23 @@
+verify GNU Make version is 3.80 or newer
+
+$ make --version
+GNU Make 3.81
+
+- ISO/ANSI C compiler needed 
+- tar required
+
+
+download the source code from 
+https://www.postgresql.org/ftp/source/
+
+$ cd Downloads/
+a directory called postgressql-9.6.2 will created
+$ cd postgresql-9.6.2/
+$ cd ls 
+aclocal.m4  configure     contrib    doc             HISTORY  Makefile  src
+config      configure.in  COPYRIGHT  GNUmakefile.in  INSTALL  README
+
+#CONFIGURATION
+
+./configure
+

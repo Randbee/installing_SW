@@ -1,0 +1,83 @@
+sudo lsb_release -a		# checking ubuntu version
+
+#update to xenial
+
+sudo apt-get update
+sudo apt-get upgrade
+sudo update-manager -d
+sudo apt-get install synaptic		# if it is not installed 
+sudo update-manager -d
+sudo apt-get dist-upgrade
+sudo apt-get install linux-headers-3.13.0-101-generic
+sudo apt-get autoremove			# removing not used packages
+sudo apt-get install update-manager-core
+sudo do-release-upgrade
+
+
+###installing postgres postigis
+sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt xenial-pgdg main" >> /etc/apt/sources.list'
+wget --quiet -O - http://apt.postgresql.org/pub/repos/apt/ACCC4CF8.asc | sudo apt-key add -
+sudo apt-get update
+
+##Removing 50unattended-upgrades.ucf-dist
+cd /etc/apt
+cd apt.conf.d/
+sudo rm 50unattended-upgrades.ucf-dist 
+
+
+sudo apt-get update
+sudo apt-get install postgresql-9.6
+sudo apt-get install postgresql-9.6-postgis-2.3 postgresql-contrib-9.6
+sudo apt-get install postgis
+psql --version
+
+sudo apt-get install pgadmin3
+#activate user postgres
+sudo -u postgres psql postgres
+alter user postgres with password 'admin';
+\q		# exit from psql
+##installing R if not present
+sudo echo "deb http://cran.rstudio.com/bin/linux/ubuntu xenial/" | sudo tee -a /etc/apt/sources.list
+sudo apt-get update
+sudo apt-get install r-base r-base-dev
+sudo apt-cache policy rstudio
+sudo apt-cache policy r
+sudo apt-get install gdebi-core
+wget https://download1.rstudio.org/rstudio-0.99.896-amd64.deb
+sudo gdebi -n rstudio-0.99.896-amd64.deb
+rm rstudio-0.99.896-amd64.deb
+
+
+##installing QGIS##
+sudo gedit /etc/apt/sources.list
+
+copy and paste 
+
+	deb http://qgis.org/debian xenial main
+	deb-src http://qgis.org/debian xenial main
+
+sudo aptget update
+sudo apt-get install qgis python-qgis qgis-plugin-grass
+
+##installing anaconda
+
+download the installer from here 
+
+https://www.continuum.io/downloads
+run 
+cd Download/
+bash Anaconda2-4.3.1-Linux-x86_64.sh 
+
+A folder called Anaconda2 is created 
+run 
+$ export PATH=~/anaconda2/bin:$PATH
+
+#check if anaconda is executable 
+
+echo $PATH
+
+#check anaconda version
+conda --version
+
+
+

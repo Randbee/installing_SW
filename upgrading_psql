@@ -1,0 +1,91 @@
+postgres 9.6 and postgis 2.3 were released on Sept 2016 
+these versions are not on http://ppa.launchpad.net/ubuntugis/ubuntugis-unstable/ubuntu/ trusty/main amd64 Packages
+
+It is common to not put on ubuntu official repositories new packages. They are put there after debuggins and trouble shooting: this version will be stable (it won't change anymore)
+
+the repos where you can install these versions lead to "unstable" packages and broken dependences
+
+
+postgres 9.6 and postgis 2.3 are are built into zesty (ubuntu 17)
+source: http://packages.ubuntu.com/search?keywords=postgresql-9.6-postgis-2.3
+
+
+FROM THE FILE /var/lib/dpkg/status
+
+package: postgresql-9.3-postgis-2.2
+
+Depends: libc6 (>= 2.14), libgdal20 (>= 2.0.1), libgeos-c1v5 (>= 3.5.0), libjson-c2 (>= 0.11), liblwgeom-2.2-5 (>= 2.2.0), libpcre3, libproj0 (>= 4.8.0-1), libsfcgal1 (>= 1.2.0), libxml2 (>= 2.7.4), postgresql-9.3, postgresql-9.3-postgis-scripts
+
+
+libgeos-c1v5
+
+Replaces: libgeos-c1 (<< 3.4.2-8~)
+Depends: libc6 (>= 2.14), libgcc1 (>= 1:4.1.1), libgeos-3.5.0 (>= 3.5.0), libstdc++6 (>= 4.1.1)
+Breaks: libgeos-c1 (<< 3.4.2-8~)	
+
+
+##used by QGIS and by Postgis 
+##from status document 
+
+Package: Postgis
+
+Depends: libc6 (>= 2.14), libgdal20 (>= 2.0.1), libgeos-c1v5 (>= 3.4.2), liblwgeom-2.2-5 (>= 2.0.0), libpq5
+
+
+libgdal1
+		it is in conflincty with libgdal1h
+		it is not into my packages
+
+libgeos-c1
+		replaced by libgeos-c1v5 on trusty and xenial
+
+liblwgeom 
+		postgresql-9.3-postgis-2.2 uses 2.2-5		
+		(>= 2.2.0)
+		it depences of libgeos-c1v5
+
+libgdal1h	not present on trusty
+		repleased by libgdal1i on xenial
+		libgdal1i replaces libgdal1 and libgdal1h
+
+I suppose it is a issue with the version of ubuntu: install xenial
+
+use the command pg_upgrade
+
+postgres version	9.6
+postgis version 	2.3 
+
+##############postgresql##############
+###USAGE###
+
+in the work station there is a specific installation directory 
+moving old cluster not necessary
+
+if it is like that move the directory
+doing (fake directories):
+
+
+mv /usr/local/pgsql /usr/local/pgsql.old
+
+- build the new version 
+  
+
+
+##############postgis##############
+
+postgis is a "run-time loadable library" for postgresql
+it is a library file written in C called postgis-2.2.so (postgis version 2.2)
+to enable the postgis function it is necessary to run CREATE EXTENSION postgis
+
+
+SELECT * 
+  FROM pg_proc 
+  WHERE proname = 'st_pointonsurface';
+
+
+the most important part of the o utput is:
+probin          | $libdir/postgis-2.2
+
+it means that the function is bound to a particular version of the postgis library
+
+

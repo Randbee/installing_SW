@@ -1,0 +1,37 @@
+##COMPILING FROM SOURCE##
+source codes are in the form of compressed tar files
+
+.tar		.tar.gz or .tar.bz2
+tools for unpacking and packing 'tar', 'gzip', 'bzip'
+
+to download the file we use
+	
+		
+		wget <link to the tarball>
+
+NOTE: download the software on the current directory
+
+
+Depending on the extension use: 
+
+$ tar -xvfz <name of tarball with .tar.gz extension>
+(or)
+$ tar -xvfj <name of tarball with tar.bz2 extension>
+
+READ DOCUMENTATION
+
+CONFIGURE ENVIRONMENT FOR COMPILING AND INSTALLING THE SOFTWARE
+	Most Softwares have a configuration script called nostly 'configure'
+
+to how more about the configuration file 
+configure --help
+
+starting configure 
+./configure
+
+COMPILATION
+make
+
+INSTALLATION
+make install
+(maybe root previleges)
